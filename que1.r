@@ -1,38 +1,22 @@
-# Q1. Write a R program to reverse a number and also calculate the sum ofdigits of that
-# number.(i don't know how to run this r program)
+# Q1. Write a R program to calculate the sum of two matrices of given size
 
+# Define the size of the matrices
+rows <- 3
+cols <- 3
 
-# Function to reverse a number
-reverse_number <- function(number) {
-  reversed <- 0
-  while (number > 0) {
-    digit <- number %% 10
-    reversed <- reversed * 10 + digit
-    number <- number %/% 10
-  }
-  return(reversed)
-}
+# Create two example matrices
+matrix1 <- matrix(1:9, nrow = rows, ncol = cols)
+matrix2 <- matrix(9:1, nrow = rows, ncol = cols)
 
-# Function to calculate the sum of digits of a number
-sum_of_digits <- function(number) {
-  sum_digits <- 0
-  while (number > 0) {
-    digit <- number %% 10
-    sum_digits <- sum_digits + digit
-    number <- number %/% 10
-  }
-  return(sum_digits)
-}
+# Calculate the sum of the matrices
+sum_matrix <- matrix1 + matrix2
 
-# Input the number
-number <- as.integer(readline("Enter a number: "))
+# Print the original matrices and their sum
+cat("Matrix 1:\n")
+print(matrix1)
 
-# Reverse the number
-reversed <- reverse_number(number)
+cat("Matrix 2:\n")
+print(matrix2)
 
-# Calculate the sum of digits
-sum_digits <- sum_of_digits(number)
-
-# Print the results
-cat("Reversed Number:", reversed, "\n")
-cat("Sum of Digits:", sum_digits, "\n")
+cat("Sum of the matrices:\n")
+print(sum_matrix)
