@@ -1,30 +1,26 @@
-# Q2. Write a python program to implement k-means algorithms on asynthetic
-# dataset
+# Q2. Consider the following observations/data. And apply simple linear regression and find 
+# out estimated coefficients b0 and b1.( use numpypackage)
+# x=[0,1,2,3,4,5,6,7,8,9,11,13]
+# y = ([1, 3, 2, 5, 7, 8, 8, 9, 10, 12,16, 18] 
 
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn.datasets import make_blobs
 
-# Generate a synthetic dataset with make_blobs
-n_samples = 300
-n_features = 2
-n_clusters = 3
+# Given data
+x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13])
+y = np.array([1, 3, 2, 5, 7, 8, 8, 9, 10, 12, 16, 18])
 
-X, y = make_blobs(n_samples=n_samples, n_features=n_features, centers=n_clusters, random_state=42)
+# Calculate the means
+x_mean = np.mean(x)
+y_mean = np.mean(y)
 
-# Create a K-Means clustering model
-kmeans = KMeans(n_clusters=n_clusters)
+# Calculate b1 (slope)
+numerator = np.sum((x - x_mean) * (y - y_mean))
+denominator = np.sum((x - x_mean) ** 2)
+b1 = numerator / denominator
 
-# Fit the model to the data
-kmeans.fit(X)
+# Calculate b0 (intercept)
+b0 = y_mean - b1 * x_mean
 
-# Get cluster centers and labels
-cluster_centers = kmeans.cluster_centers_
-labels = kmeans.labels_
-
-# Plot the data points and cluster centers
-plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
-plt.scatter(cluster_centers[:, 0], cluster_centers[:, 1,], marker='x', s=200, linewidths=3, color='red')
-plt.title("K-Means Clustering")
-plt.show()
+# Print the coefficients
+print("b0 (intercept):", b0)
+print("b1 (slope):", b1)
