@@ -1,41 +1,30 @@
-# Q2.Consider the student data set. It can be downloaded from:
-# https://drive.google.com/open?id=1oakZCv7g3mlmCSdv9J8kdSaqO 5_6dIOw .
-# Write a programme in python to apply simple linear regression and find out mean 
-# absolute error, mean squared error and root mean squared error
+# Q2. Write a python program to implement k-means algorithms on asynthetic
+# dataset
 
-import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
 
-# Load the dataset
-data = pd.read_csv("student_data.csv")
+# Generate a synthetic dataset with make_blobs
+n_samples = 300
+n_features = 2
+n_clusters = 3
 
-# Extract the features (X) and target (y)
-X = data[['X']]  # Feature
-y = data['Y']    # Target
+X, y = make_blobs(n_samples=n_samples, n_features=n_features, centers=n_clusters, random_state=42)
 
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Create a K-Means clustering model
+kmeans = KMeans(n_clusters=n_clusters)
 
-# Initialize and train the linear regression model
-model = LinearRegression()
-model.fit(X_train, y_train)
+# Fit the model to the data
+kmeans.fit(X)
 
-# Make predictions on the test set
-y_pred = model.predict(X_test)
+# Get cluster centers and labels
+cluster_centers = kmeans.cluster_centers_
+labels = kmeans.labels_
 
-# Calculate mean absolute error (MAE)
-mae = mean_absolute_error(y_test, y_pred)
-
-# Calculate mean squared error (MSE)
-mse = mean_squared_error(y_test, y_pred)
-
-# Calculate root mean squared error (RMSE)
-rmse = np.sqrt(mse)
-
-# Print the results
-print("Mean Absolute Error (MAE):", mae)
-print("Mean Squared Error (MSE):", mse)
-print("Root Mean Squared Error (RMSE):", rmse)
+# Plot the data points and cluster centers
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
+plt.scatter(cluster_centers[:, 0], cluster_centers[:, 1,], marker='x', s=200, linewidths=3, color='red')
+plt.title("K-Means Clustering")
+plt.show()
