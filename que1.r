@@ -1,21 +1,18 @@
-# Q1.Write a R program to add, multiply and divide two vectors of integertype. (Vector
-# length should be minimum 4) 
+# Q1. Write an R program to calculate the multiplication table using afunction
 
-# Define two integer vectors
-vector1 <- c(1, 2, 3, 4)
-vector2 <- c(5, 6, 7, 8)
+# Function to generate a multiplication table
+multiplication_table <- function(number, limit) {
+  for (i in 1:limit) {
+    result <- number * i
+    cat(paste(number, "x", i, "=", result), "\n")
+  }
+}
 
-# Addition
-addition_result <- vector1 + vector2
-print("Addition Result:")
-print(addition_result)
+# Input the number for which you want the multiplication table
+number <- as.integer(readline("Enter a number for the multiplication table: "))
 
-# Multiplication
-multiplication_result <- vector1 * vector2
-print("Multiplication Result:")
-print(multiplication_result)
+# Input the limit for the table
+limit <- as.integer(readline("Enter the limit for the multiplication table: "))
 
-# Division
-division_result <- vector1 / vector2
-print("Division Result:")
-print(division_result)
+# Call the function to generate and print the multiplication table
+multiplication_table(number, limit)
